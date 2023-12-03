@@ -21,4 +21,17 @@ public class InventoryItemController : MonoBehaviour
     {
         item = newItem;
     }
+
+    //public void ClearSlot()
+    //{
+    //    item = null;
+    //}
+
+    public void UseItem()
+    {
+        if (item != null)
+        {
+            item.Use();
+        }
+    }
 }

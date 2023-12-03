@@ -361,12 +361,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78b1a0e8f3a007e4d980b8661989a9a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items: []
+  _itemList: []
+  _MaxInventorySlots: 2
+  _stackSize: 0
   _itemContent: {fileID: 245310695}
   _inventoryItem: {fileID: 6323677460827112868, guid: 13668abe0666a3547a3a6813f630c2f8,
     type: 3}
   _enableRemove: {fileID: 26756090}
-  InventoryItems: []
+  InventoryItemsSlots: []
 --- !u!4 &253210895
 Transform:
   m_ObjectHideFlags: 0
@@ -1645,6 +1647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 83c38cf6c3fdde44ea3d25b63e8465bc, type: 2}
+  _isMax: 0
 --- !u!1 &1753152546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,6 +2322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 9ad610db3aa6a3849b552a1cf84f3bed, type: 2}
+  _isMax: 0
 --- !u!1001 &2114389114762006819
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2494,3 +2498,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _item: {fileID: 11400000, guid: 876cfd2a816ac7340b4aaf2bfa1e0892, type: 2}
+  _isMax: 0

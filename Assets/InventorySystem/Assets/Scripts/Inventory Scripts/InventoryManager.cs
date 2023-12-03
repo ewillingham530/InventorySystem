@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
-    public List<Item> Items = new List<Item>(); //where picked-up items will be stored
+    public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
+
+    [SerializeField] public int _MaxInventorySlots = 2;
+    [SerializeField] private int _stackSize;
+    public int StackSize => _stackSize;
 
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
 
     public Toggle _enableRemove;
 
-    public InventoryItemController[] InventoryItems;
+    public InventoryItemController[] InventoryItemsSlots;
 
     private void Awake()
     {
@@ -22,30 +27,40 @@ public class InventoryManager : MonoBehaviour
     }
 
     // add item to List
-    public void AddItem(Item item)
+    public bool AddItem(Item item)
     {
-        Items.Add(item);
+        if(_itemList.Count < _MaxInventorySlots)
+        {
+            _itemList.Add(item);
+            return true;
+        }
+        else
+        {
+            Debug.Log("Max Stack Size reached. Cannot add more.");
+            return false;
+        }
+
     }
 
     // remove item from list
     public void RemoveItem(Item item)
     {
-        Items.Remove(item);
+        _itemList.Remove(item);
     }
 
-
+    // Finds and changes the name, item icon, and remove button for each Item picked up
     public void ListItems()
     {
         
-        foreach (var item in Items)
+        foreach (var item in _itemList)
         {
             GameObject obj = Instantiate(_inventoryItem, _itemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveItemButton").GetComponent<Button>();
 
-            itemName.text = item.itemName;
-            itemIcon.sprite = item.icon;
+            itemName.text = item.ItemName;
+            itemIcon.sprite = item.Icon;
 
             if(_enableRemove.isOn)
             {
@@ -56,7 +71,7 @@ public class InventoryManager : MonoBehaviour
         SetInventoryItems();
     }
 
-    // cleans content before open
+    // Cleans content before open
     public void CleanList()
     {
         foreach (Transform item in _itemContent)
@@ -65,6 +80,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Enable the Remove Item toggle on each item in the inventory
     public void EnableItemsRemoved()
     {
         if(_enableRemove.isOn)
@@ -84,13 +100,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Adds the Items to the UI when you open the inventory
     public void SetInventoryItems()
     {
-        InventoryItems = _itemContent.GetComponentsInChildren<InventoryItemController>();
+        InventoryItemsSlots = _itemContent.GetComponentsInChildren<InventoryItemController>();
 
-        for (int i = 0; i < Items.Count; i++)
+        for (int i = 0; i < _itemList.Count; i++)
         {
-            InventoryItems[i].AddItem(Items[i]);
+            //if ()
+                InventoryItemsSlots[i].AddItem(_itemList[i]);
+            
         }
     }
+
+    
 }
