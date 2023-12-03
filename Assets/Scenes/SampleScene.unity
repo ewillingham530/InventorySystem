@@ -399,7 +399,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 35}
+  m_SizeDelta: {x: 0, y: 140}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &245310696
 MonoBehaviour:
@@ -470,6 +470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemList: []
   _MaxInventorySlots: 10
+  _inventory: {fileID: 1888508748}
   _itemContent: {fileID: 245310695}
   _inventoryItem: {fileID: 6323677460827112868, guid: 13668abe0666a3547a3a6813f630c2f8,
     type: 3}

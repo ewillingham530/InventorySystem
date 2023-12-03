@@ -8,10 +8,12 @@ using System.Linq;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
+
+
     public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
 
     [SerializeField] public int _MaxInventorySlots = 2;
-
+    public GameObject _inventory;
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
 
@@ -24,6 +26,11 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        _inventory.SetActive(false);
     }
 
     // Add item to List
@@ -87,6 +94,7 @@ public class InventoryManager : MonoBehaviour
         foreach (Transform item in _itemContent)
         {
             Destroy(item.gameObject);
+                                                                        // when close inventory and play again, doesnt reset the quantity
         }
     }
 
