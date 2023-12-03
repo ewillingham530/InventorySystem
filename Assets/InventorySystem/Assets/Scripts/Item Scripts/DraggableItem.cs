@@ -13,7 +13,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Debug.Log("Begin drag");
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
-        transform.SetAsLastSibling();           //places object at the bottom of the stack, or in other words, on top of the viewport
+        transform.SetAsLastSibling();           
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -24,7 +24,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrop(PointerEventData eventData)
     {
-
         Debug.Log("Dropped");
     }
 

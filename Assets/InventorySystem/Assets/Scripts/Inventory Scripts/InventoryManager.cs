@@ -4,15 +4,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using System.IO;
+using System;
 
+[System.Serializable]
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
 
-    public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
+    [SerializeField] public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
 
-    [SerializeField] public int _MaxInventorySlots = 2;
+    [SerializeField] public int _MaxInventorySlots = 2;  
+
     public GameObject _inventory;
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
@@ -21,7 +25,10 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryItemController[] InventoryItemsSlots;
 
-    
+    [SerializeField] public string inventoryName = string.Empty;
+    [SerializeField] public string saveFilePath = string.Empty;
+
+
 
     private void Awake()
     {
@@ -31,6 +38,17 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         _inventory.SetActive(false);
+    }
+
+    public void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.F1))
+            Save(); 
+
+        if (Input.GetKeyDown(KeyCode.F2))
+            Load();  
+
     }
 
     // Add item to List
@@ -147,4 +165,51 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
+
+
+    public bool Save()
+    {
+        try
+        {
+            saveFilePath = Application.dataPath + $"/{inventoryName}.json";
+
+            string dataFile = JsonUtility.ToJson(this, true);
+            File.WriteAllText(saveFilePath, dataFile);
+
+            Debug.Log("Saved.");
+            return true;
+        }
+        catch (Exception)
+        {
+            Debug.Log("Error saving.");
+            return false;
+        }
+
+    }
+
+    public bool Load()
+    {
+        try
+        {
+            saveFilePath = Application.dataPath + $"/{inventoryName}.json";
+            if (File.Exists(saveFilePath))
+            {
+
+                string dataFile = File.ReadAllText(saveFilePath);
+
+                JsonUtility.FromJsonOverwrite(dataFile, this);
+
+                Debug.Log("Loaded.");
+            }
+            return true;
+        }
+        catch (Exception)
+        {
+            Debug.Log("Unable to load data.");
+            return false;
+
+        }
+
+    }
+
 }

@@ -1,0 +1,54 @@
+{
+    "_itemList": [
+        {
+            "instanceID": 26716
+        },
+        {
+            "instanceID": 26694
+        },
+        {
+            "instanceID": 26694
+        },
+        {
+            "instanceID": 26694
+        }
+    ],
+    "_MaxInventorySlots": 10,
+    "_inventory": {
+        "instanceID": 26638
+    },
+    "_itemContent": {
+        "instanceID": 26454
+    },
+    "_inventoryItem": {
+        "instanceID": 26702
+    },
+    "_enableRemove": {
+        "instanceID": 26436
+    },
+    "InventoryItemsSlots": [
+        {
+            "instanceID": -17798
+        },
+        {
+            "instanceID": -17860
+        },
+        {
+            "instanceID": -17922
+        },
+        {
+            "instanceID": -17984
+        },
+        {
+            "instanceID": -18046
+        },
+        {
+            "instanceID": -18108
+        },
+        {
+            "instanceID": -18170
+        }
+    ],
+    "inventoryName": "Player Inventory",
+    "saveFilePath": "C:/Projects/Unity/Scripting for Games/InventorySystem/Assets/Player Inventory.json"
+}
