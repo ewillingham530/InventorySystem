@@ -12,6 +12,7 @@ public class Item : ScriptableObject
     public string Description;      // Internal Description of item
     public bool isStackable = false;
     public int MaxStackSize;        // Set Max stack size per item
+    public int Quantity = 1;
     public Sprite Icon;             // Item Icon
 
     public virtual void Use()

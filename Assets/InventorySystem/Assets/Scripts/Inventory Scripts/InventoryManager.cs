@@ -11,8 +11,6 @@ public class InventoryManager : MonoBehaviour
     public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
 
     [SerializeField] public int _MaxInventorySlots = 2;
-    [SerializeField] private int _stackSize;
-    public int StackSize => _stackSize;
 
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
@@ -21,25 +19,38 @@ public class InventoryManager : MonoBehaviour
 
     public InventoryItemController[] InventoryItemsSlots;
 
+    
+
     private void Awake()
     {
         Instance = this;
     }
 
-    // add item to List
+    // Add item to List
     public bool AddItem(Item item)
     {
-        if(_itemList.Count < _MaxInventorySlots)
+        bool itemExists = DoesItemExist(item);
+        if (item != null)
         {
-            _itemList.Add(item);
-            return true;
+            if (itemExists)
+            {
+                item.Quantity++;
+                Debug.Log(item.ItemName + "quantity is" + item.Quantity);
+                return true;
+            }
+            if (itemExists == false && _itemList.Count < _MaxInventorySlots)
+            {
+                Debug.Log("Added " + item.ItemName);
+                _itemList.Add(item);
+                return true;
+            }
+            else
+            {
+                Debug.Log("Max Stack Size reached. Cannot add more.");
+                return false;
+            }
         }
-        else
-        {
-            Debug.Log("Max Stack Size reached. Cannot add more.");
-            return false;
-        }
-
+        return false;
     }
 
     // remove item from list
@@ -51,14 +62,13 @@ public class InventoryManager : MonoBehaviour
     // Finds and changes the name, item icon, and remove button for each Item picked up
     public void ListItems()
     {
-        
         foreach (var item in _itemList)
         {
             GameObject obj = Instantiate(_inventoryItem, _itemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveItemButton").GetComponent<Button>();
-
+            
             itemName.text = item.ItemName;
             itemIcon.sprite = item.Icon;
 
@@ -106,12 +116,27 @@ public class InventoryManager : MonoBehaviour
         InventoryItemsSlots = _itemContent.GetComponentsInChildren<InventoryItemController>();
 
         for (int i = 0; i < _itemList.Count; i++)
-        {
-            //if ()
+        {      
                 InventoryItemsSlots[i].AddItem(_itemList[i]);
             
         }
     }
 
-    
+    // Checks for the item in the inventory
+    public bool DoesItemExist(Item item)
+    {
+        // Finds if the item already exists in the inventory
+        List<Item> existingItems = _itemList.FindAll(delegate (Item s) { return s == item; });
+
+        // If the item exists or is found above then find any that has < MaxStackSize
+        if (existingItems.Count > 0)
+        {
+            Item itemFound = existingItems.Find(delegate (Item s) { return s.Quantity < item.MaxStackSize; });
+            if (itemFound != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
