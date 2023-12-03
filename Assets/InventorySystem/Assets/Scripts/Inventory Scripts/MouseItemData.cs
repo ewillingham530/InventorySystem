@@ -11,7 +11,7 @@ public class MouseItemData : MonoBehaviour
 
     private void Awake()
     {
-        _itemSprite.color = Color.clear;
+       // _itemSprite.color = Color.clear;
         _itemCount.text = "";
     }
 

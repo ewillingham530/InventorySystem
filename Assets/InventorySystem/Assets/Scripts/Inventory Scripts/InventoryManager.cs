@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
 
 
     [SerializeField] public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
+    [SerializeField] public List<InventorySlot> _inventoryItems = new List<InventorySlot>();
 
     [SerializeField] public int _MaxInventorySlots = 2;  
 
@@ -54,24 +55,28 @@ public class InventoryManager : MonoBehaviour
     // Add item to List
     public bool AddItem(Item item)
     {
-        bool itemExists = DoesItemExist(item);
         if (item != null)
         {
-            if (itemExists)
+            InventorySlot itemExists = DoesItemExist(item);
+
+            if (itemExists != null)
             {
-                item.Quantity++;
-                Debug.Log(item.ItemName + "quantity is" + item.Quantity);
+                itemExists.quantity++;
+                Debug.Log(item.ItemName + " quantity is " + item.Quantity);
                 return true;
             }
-            if (itemExists == false && _itemList.Count < _MaxInventorySlots)
+            if (itemExists == null && _inventoryItems.Count < _MaxInventorySlots)
             {
                 Debug.Log("Added " + item.ItemName);
-                _itemList.Add(item);
+                InventorySlot slot = new InventorySlot(item.ID, item);
+
+                _inventoryItems.Add(slot);
                 return true;
             }
+            
             else
             {
-                Debug.Log("Max Stack Size reached. Cannot add more.");
+                Debug.Log("Max Inventory Size reached. Cannot add more.");
                 return false;
             }
         }
@@ -81,21 +86,30 @@ public class InventoryManager : MonoBehaviour
     // remove item from list
     public void RemoveItem(Item item)
     {
-        _itemList.Remove(item);
+        InventorySlot slot = _inventoryItems.Find(delegate (InventorySlot s) { return s.slotItem == item; });
+        if(slot != null)
+        {
+            _inventoryItems.Remove(slot);
+        }
+        
     }
 
     // Finds and changes the name, item icon, and remove button for each Item picked up
     public void ListItems()
     {
-        foreach (var item in _itemList)
+        foreach (var item in _inventoryItems)
         {
             GameObject obj = Instantiate(_inventoryItem, _itemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
             var itemIcon = obj.transform.Find("ItemImage").GetComponent<Image>();
             var removeButton = obj.transform.Find("RemoveItemButton").GetComponent<Button>();
+            var itemQuantityDisplay = obj.transform.Find("ItemQuantity").GetComponent<TMP_Text>();
+
+            itemName.text = item.slotItem.ItemName;
+            itemIcon.sprite = item.slotItem.Icon;
+
             
-            itemName.text = item.ItemName;
-            itemIcon.sprite = item.Icon;
+            itemQuantityDisplay.text = item.quantity.ToString();
 
             if(_enableRemove.isOn)
             {
@@ -141,29 +155,29 @@ public class InventoryManager : MonoBehaviour
     {
         InventoryItemsSlots = _itemContent.GetComponentsInChildren<InventoryItemController>();
 
-        for (int i = 0; i < _itemList.Count; i++)
+        for (int i = 0; i < _inventoryItems.Count; i++)
         {      
-                InventoryItemsSlots[i].AddItem(_itemList[i]);
+                InventoryItemsSlots[i].AddItem(_inventoryItems[i].slotItem);
             
         }
     }
 
     // Checks for the item in the inventory
-    public bool DoesItemExist(Item item)
+    public InventorySlot DoesItemExist(Item item)
     {
         // Finds if the item already exists in the inventory
-        List<Item> existingItems = _itemList.FindAll(delegate (Item s) { return s == item; });
+        List<InventorySlot> existingItems = _inventoryItems.FindAll(delegate (InventorySlot s) { return s.slotItem == item; });
 
         // If the item exists or is found above then find any that has < MaxStackSize
         if (existingItems.Count > 0)
         {
-            Item itemFound = existingItems.Find(delegate (Item s) { return s.Quantity < item.MaxStackSize; });
+            InventorySlot itemFound = existingItems.Find(delegate (InventorySlot s) { return s.quantity < item.MaxStackSize; });
             if (itemFound != null)
             {
-                return true;
+                return itemFound;
             }
         }
-        return false;
+        return null;
     }
 
 
