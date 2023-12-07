@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    [SerializeField] InventoryManager _list;
+    //[SerializeField] InventoryManager _list;
 
     Transform parentAfterDrag;  // original parent of the dragged object
     public void OnBeginDrag(PointerEventData eventData)

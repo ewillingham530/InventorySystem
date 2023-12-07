@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class InventoryCategory : ScriptableObject
 {
+    [Header("Category Identifiers")]
     [SerializeField] public int Id;
     [SerializeField] public string Name;
 

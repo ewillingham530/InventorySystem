@@ -358,7 +358,6 @@ GameObject:
   - component: {fileID: 2951608772311843132}
   - component: {fileID: 381749837184651827}
   - component: {fileID: 6184951413143423900}
-  - component: {fileID: 8293611426534039392}
   - component: {fileID: 4989751586310267624}
   m_Layer: 5
   m_Name: Item
@@ -498,20 +497,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RemoveItemButton: {fileID: 0}
---- !u!114 &8293611426534039392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6323677460827112868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d28e62c64b1317349b69c04bae9e3448, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _itemSprite: {fileID: 2951608772311843132}
-  _itemCount: {fileID: 3081401973576875772}
 --- !u!114 &4989751586310267624
 MonoBehaviour:
   m_ObjectHideFlags: 0

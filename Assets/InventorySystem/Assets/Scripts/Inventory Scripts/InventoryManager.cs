@@ -23,17 +23,23 @@ public class InventoryManager : MonoBehaviour
     [Header("Inventory Parameters")]
     [SerializeField] public int _MaxInventorySlots = 2;
 
+    [Header("" + "")][Tooltip("Number of categories in which to filter items in inventory.")]
     //where the list of category tabs in the UI will be stored
     [SerializeField] public List<InventoryCategory> itemCategories = new List<InventoryCategory>();
 
     [Header("Inventory UI Objects")]
+    [Tooltip("Gameobject where all of your Inventory UI is stored.")]
     public GameObject _inventory;        //Master gameobject where all your Inventory is stored
+    [Tooltip("Location where items (2D UI prefab) are filled.")]
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
+    [Tooltip("2D UI prefab that holds the name and icon of each item.")]
     public GameObject _inventoryItem;    //2D UI prefab item
 
-    public Toggle _enableRemove;
+    [Tooltip("Toggle on Inventory that allows items to be removed.")]
+    public Toggle _enableRemove;         //Toggle on Inventory that player can turn on and off to remove items
 
     [HideInInspector]
+    //stores the number of items in the inventory that will be added when it opens
     public InventoryItemController[] InventoryItemsSlots;
 
     [Header("Save Path")]
@@ -47,11 +53,13 @@ public class InventoryManager : MonoBehaviour
         Instance = this;
     }
 
+    //Sets inventory inactive at start
     private void Start()
     {
         _inventory.SetActive(false);
     }
 
+    //Detects when player saves and loads a scene
     public void Update()
     {
 
@@ -84,7 +92,6 @@ public class InventoryManager : MonoBehaviour
                 _inventoryItems.Add(slot);
                 return true;
             }
-            
             else
             {
                 Debug.Log("Max Inventory Size reached. Cannot add more.");
@@ -141,8 +148,7 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (Transform item in _itemContent)
         {
-            Destroy(item.gameObject);
-                                                                        // when close inventory and play again, doesnt reset the quantity
+            Destroy(item.gameObject);                                   
         }
     }
 
@@ -156,7 +162,6 @@ public class InventoryManager : MonoBehaviour
                 item.Find("RemoveItemButton").gameObject.SetActive(true);
             }
         }
-
         else
         {
             foreach (Transform item in _itemContent)
@@ -174,7 +179,6 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < invItems.Count; i++)
         {      
                 InventoryItemsSlots[i].AddItem(invItems[i].slotItem);
-            
         }
     }
 
@@ -204,6 +208,7 @@ public class InventoryManager : MonoBehaviour
         ListItems(filterList);
     }
 
+    //Saves inventory
     public bool Save()
     {
         try
@@ -221,9 +226,9 @@ public class InventoryManager : MonoBehaviour
             Debug.Log("Error saving.");
             return false;
         }
-
     }
 
+    //Loads inventory
     public bool Load()
     {
         try
