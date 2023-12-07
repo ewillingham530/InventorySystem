@@ -2,59 +2,76 @@
     "_itemList": [],
     "_inventoryItems": [
         {
+            "ID": 1,
+            "slotItem": {
+                "instanceID": 11798
+            },
+            "quantity": 1
+        },
+        {
             "ID": 2,
             "slotItem": {
-                "instanceID": 26872
+                "instanceID": 27090
             },
             "quantity": 2
         },
         {
             "ID": 0,
             "slotItem": {
-                "instanceID": 26756
+                "instanceID": 11822
             },
             "quantity": 1
         },
         {
             "ID": 0,
             "slotItem": {
-                "instanceID": 26756
-            },
-            "quantity": 1
-        },
-        {
-            "ID": 1,
-            "slotItem": {
-                "instanceID": 26748
+                "instanceID": 11822
             },
             "quantity": 1
         }
     ],
-    "_MaxInventorySlots": 10,
+    "_MaxInventorySlots": 6,
+    "itemCategories": [
+        {
+            "instanceID": 11826
+        },
+        {
+            "instanceID": 11804
+        },
+        {
+            "instanceID": 27088
+        }
+    ],
     "_inventory": {
-        "instanceID": 26664
+        "instanceID": 27318
     },
     "_itemContent": {
-        "instanceID": 26462
+        "instanceID": 27116
     },
     "_inventoryItem": {
-        "instanceID": 26722
+        "instanceID": 27078
     },
     "_enableRemove": {
-        "instanceID": 26448
+        "instanceID": 27106
     },
     "InventoryItemsSlots": [
         {
-            "instanceID": -2968
+            "instanceID": -12226
         },
         {
-            "instanceID": -3030
+            "instanceID": -12286
         },
         {
-            "instanceID": -3092
+            "instanceID": -12346
         },
         {
-            "instanceID": -3154
+            "instanceID": -12406
+        },
+        {
+            "instanceID": -12466
+        },
+        {
+            "instanceID": -12526
         }
     ],
     "inventoryName": "Player Inventory",
