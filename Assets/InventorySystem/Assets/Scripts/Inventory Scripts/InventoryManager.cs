@@ -20,19 +20,23 @@ public class InventoryManager : MonoBehaviour
     //where the inventory slots holding the picked-up items will be stored
     [SerializeField] public List<InventorySlot> _inventoryItems = new List<InventorySlot>();
 
+    [Header("Inventory Parameters")]
+    [SerializeField] public int _MaxInventorySlots = 2;
+
     //where the list of category tabs in the UI will be stored
     [SerializeField] public List<InventoryCategory> itemCategories = new List<InventoryCategory>();
 
-    [SerializeField] public int _MaxInventorySlots = 2;  
-
+    [Header("Inventory UI Objects")]
     public GameObject _inventory;        //Master gameobject where all your Inventory is stored
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
 
     public Toggle _enableRemove;
 
+    [HideInInspector]
     public InventoryItemController[] InventoryItemsSlots;
 
+    [Header("Save Path")]
     [SerializeField] public string inventoryName = string.Empty;
     [SerializeField] public string saveFilePath = string.Empty;
 
