@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TabGroup : MonoBehaviour
 {
@@ -40,15 +41,21 @@ public class TabGroup : MonoBehaviour
     public void OnTabSelected(CategoryButton button)
     {
         //Find if selected tab selects and deselect it
-        if(selectedTab != null)
+        if (selectedTab != null)
         {
             selectedTab.Deselect();
         }
 
         selectedTab = button;
 
-        selectedTab.Select();
-
+        TextMeshProUGUI tabText = button.GetComponentInChildren<TextMeshProUGUI>();
+        if (tabText != null)
+        {
+            string name = tabText.text;
+            selectedTab.Select(name);
+           
+        }
+        
         ResetTabs();
        button.background.color = tabActive;
 

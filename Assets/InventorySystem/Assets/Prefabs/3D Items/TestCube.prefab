@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8709666923986373498}
   - component: {fileID: 655987956}
   m_Layer: 0
-  m_Name: TestBook
+  m_Name: TestCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

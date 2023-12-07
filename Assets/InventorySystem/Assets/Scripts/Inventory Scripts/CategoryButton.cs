@@ -37,11 +37,22 @@ public class CategoryButton : MonoBehaviour, IPointerClickHandler, IPointerEnter
     }
 
 
-    public void Select()
+    public void Select(string category)
     {
         if(onTabSelected != null)
         {
             onTabSelected.Invoke();
+
+            if (category.ToUpper() == "ALL")
+            {
+                InventoryManager.Instance.CleanList();
+                InventoryManager.Instance.ListItems();
+            }
+            else
+            {
+                InventoryManager.Instance.CategoryFilter(category);
+            }
+            
         }
     }
     public void Deselect()

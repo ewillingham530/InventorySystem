@@ -1,52 +1,60 @@
 {
-    "_itemList": [
+    "_itemList": [],
+    "_inventoryItems": [
         {
-            "instanceID": 26716
+            "ID": 2,
+            "slotItem": {
+                "instanceID": 26872
+            },
+            "quantity": 2
         },
         {
-            "instanceID": 26694
+            "ID": 0,
+            "slotItem": {
+                "instanceID": 26756
+            },
+            "quantity": 1
         },
         {
-            "instanceID": 26694
+            "ID": 0,
+            "slotItem": {
+                "instanceID": 26756
+            },
+            "quantity": 1
         },
         {
-            "instanceID": 26694
+            "ID": 1,
+            "slotItem": {
+                "instanceID": 26748
+            },
+            "quantity": 1
         }
     ],
     "_MaxInventorySlots": 10,
     "_inventory": {
-        "instanceID": 26638
+        "instanceID": 26664
     },
     "_itemContent": {
-        "instanceID": 26454
+        "instanceID": 26462
     },
     "_inventoryItem": {
-        "instanceID": 26702
+        "instanceID": 26722
     },
     "_enableRemove": {
-        "instanceID": 26436
+        "instanceID": 26448
     },
     "InventoryItemsSlots": [
         {
-            "instanceID": -17798
+            "instanceID": -2968
         },
         {
-            "instanceID": -17860
+            "instanceID": -3030
         },
         {
-            "instanceID": -17922
+            "instanceID": -3092
         },
         {
-            "instanceID": -17984
-        },
-        {
-            "instanceID": -18046
-        },
-        {
-            "instanceID": -18108
-        },
-        {
-            "instanceID": -18170
+            "instanceID": -3154
         }
     ],
     "inventoryName": "Player Inventory",

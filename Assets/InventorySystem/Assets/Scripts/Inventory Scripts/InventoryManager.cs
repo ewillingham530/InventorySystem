@@ -12,13 +12,20 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
 
+    [HideInInspector]
+    //where picked-up items will be stored
+    [SerializeField] public List<Item> _itemList = new List<Item>();
 
-    [SerializeField] public List<Item> _itemList = new List<Item>(); //where picked-up items will be stored
+    [HideInInspector]
+    //where the inventory slots holding the picked-up items will be stored
     [SerializeField] public List<InventorySlot> _inventoryItems = new List<InventorySlot>();
+
+    //where the list of category tabs in the UI will be stored
+    [SerializeField] public List<InventoryCategory> itemCategories = new List<InventoryCategory>();
 
     [SerializeField] public int _MaxInventorySlots = 2;  
 
-    public GameObject _inventory;
+    public GameObject _inventory;        //Master gameobject where all your Inventory is stored
     public Transform _itemContent;       //Location where items (2D UI prefab) are filled
     public GameObject _inventoryItem;    //2D UI prefab item
 
@@ -94,10 +101,15 @@ public class InventoryManager : MonoBehaviour
         
     }
 
-    // Finds and changes the name, item icon, and remove button for each Item picked up
     public void ListItems()
     {
-        foreach (var item in _inventoryItems)
+        ListItems(_inventoryItems);
+    }
+
+    // Finds and changes the name, item icon, and remove button for each Item picked up. Displays the quantity in the UI.
+    public void ListItems(List<InventorySlot> invItems)
+    {
+        foreach (var item in invItems)
         {
             GameObject obj = Instantiate(_inventoryItem, _itemContent);
             var itemName = obj.transform.Find("ItemName").GetComponent<TMP_Text>();
@@ -117,7 +129,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
 
-        SetInventoryItems();
+        SetInventoryItems(invItems);
     }
 
     // Cleans content before open
@@ -151,13 +163,13 @@ public class InventoryManager : MonoBehaviour
     }
 
     // Adds the Items to the UI when you open the inventory
-    public void SetInventoryItems()
+    public void SetInventoryItems(List<InventorySlot> invItems)
     {
         InventoryItemsSlots = _itemContent.GetComponentsInChildren<InventoryItemController>();
 
-        for (int i = 0; i < _inventoryItems.Count; i++)
+        for (int i = 0; i < invItems.Count; i++)
         {      
-                InventoryItemsSlots[i].AddItem(_inventoryItems[i].slotItem);
+                InventoryItemsSlots[i].AddItem(invItems[i].slotItem);
             
         }
     }
@@ -180,6 +192,13 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
+    //Filters items based on category
+    public void CategoryFilter(string category)
+    {
+        CleanList();
+        List<InventorySlot> filterList = _inventoryItems.FindAll(delegate (InventorySlot s) { return s.slotItem.Category.Name == category; });
+        ListItems(filterList);
+    }
 
     public bool Save()
     {

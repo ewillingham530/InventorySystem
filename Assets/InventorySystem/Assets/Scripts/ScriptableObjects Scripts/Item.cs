@@ -16,6 +16,7 @@ public class Item : ScriptableObject
     public int Quantity = 1;
     public Sprite Icon;             // Item Icon
 
+    [SerializeField] public InventoryCategory Category;
     public virtual void Use()
     {
         // use the item to make something happen

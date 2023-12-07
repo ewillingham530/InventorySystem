@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95aa9e9131b04aa42b282e67c3a76a16, type: 3}
-  m_Name: TestSphere
+  m_Name: TestCyl
   m_EditorClassIdentifier: 
-  ID: 2
-  ItemName: test
-  Description: Test
+  ID: 1
+  ItemName: Cylinder
+  Description: 
   isStackable: 1
-  MaxStackSize: 3
+  MaxStackSize: 2
   Quantity: 1
-  Icon: {fileID: 21300000, guid: 9aebd705574f9e642aef1e5f59b3e4d8, type: 3}
+  Icon: {fileID: 21300000, guid: f9161c6c9e06dc445ada3ee16d991f90, type: 3}
+  Category: {fileID: 11400000, guid: eb9e8986e22970d4c8d5df62eb4b20db, type: 2}
